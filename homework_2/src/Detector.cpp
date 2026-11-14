@@ -5,6 +5,7 @@
 
 #include <string>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 using namespace aruco;
@@ -26,7 +27,8 @@ void detectAprilTags(const Mat& input, Mat& output) {
     }
 }
 
-void detectCubeColor(const Mat& input, Mat& output) {
+void detectCubeColor(const Mat& input, Mat& output, int saturation_min,
+                     int white_value_min) {
     const Rect region(input.cols / 4, input.rows / 4,
                       input.cols / 2, input.rows * 3 / 10);
     Mat hsv;
@@ -39,13 +41,13 @@ void detectCubeColor(const Mat& input, Mat& output) {
         Scalar display;
     };
     const ColorRange colors[] = {
-        {"Red",    {0, 110, 70},   {9, 255, 255},   {0, 0, 255}},
-        {"Orange", {10, 100, 70},  {22, 255, 255},  {0, 140, 255}},
-        {"Yellow", {23, 100, 80},  {38, 255, 255},  {0, 255, 255}},
-        {"Green",  {39, 70, 50},   {89, 255, 255},  {0, 255, 0}},
-        {"Blue",   {90, 70, 40},   {135, 255, 255}, {255, 0, 0}},
-        {"White",  {0, 0, 205},    {179, 70, 255}, {255, 255, 255}},
-        {"Red",    {170, 110, 70}, {179, 255, 255}, {0, 0, 255}}
+        {"Red",    Scalar(0, max(110, saturation_min), 70),    {9, 255, 255},   {0, 0, 255}},
+        {"Orange", Scalar(10, max(100, saturation_min), 70), {22, 255, 255},  {0, 140, 255}},
+        {"Yellow", Scalar(23, max(100, saturation_min), 80), {38, 255, 255},  {0, 255, 255}},
+        {"Green",  Scalar(39, saturation_min, 50),            {89, 255, 255},  {0, 255, 0}},
+        {"Blue",   Scalar(90, saturation_min, 40),            {135, 255, 255}, {255, 0, 0}},
+        {"White",  Scalar(0, 0, white_value_min),             {179, 70, 255}, {255, 255, 255}},
+        {"Red",    Scalar(170, max(110, saturation_min), 70),{179, 255, 255}, {0, 0, 255}}
     };
 
     const ColorRange* best = nullptr;

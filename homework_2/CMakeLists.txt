@@ -9,7 +9,8 @@ target_compile_features(homework_2 PRIVATE cxx_std_17)
 target_include_directories(homework_2 PRIVATE include ${OpenCV_INCLUDE_DIRS})
 target_link_libraries(homework_2 PRIVATE ${OpenCV_LIBS})
 target_compile_definitions(homework_2 PRIVATE
-    HOMEWORK_VIDEO_PATH="${CMAKE_CURRENT_SOURCE_DIR}/../video.mp4")
+    APRIL_VIDEO_PATH="${CMAKE_CURRENT_SOURCE_DIR}/video.mp4"
+    CUBE_VIDEO_PATH="${CMAKE_CURRENT_SOURCE_DIR}/../video.mp4")
 
 if(WIN32 AND OpenCV_DIR)
     set(_opencv_bin "${OpenCV_DIR}/x64/vc16/bin")
