@@ -5,3 +5,6 @@ out/
 *.exe
 *.dll
 *.pdb
+Image_raw.png
+Image_binary.png
+result.png

@@ -6,4 +6,6 @@ Three windows are shown: `Image_raw`, `Image_binary`, and `result`. The binary t
 
 Press `S` to save `Image_raw.png`, `Image_binary.png`, `result.png`, and a combined `screenshot.png` in the current working directory. Press Esc to stop playback.
 
+Run with the `snapshot` command argument to save the first AprilTag frame and exit. An example is included as `screenshot.png`.
+
 To process the Rubik's Cube video instead, set the Visual Studio command argument to `cube`. The program then reads the `video.mp4` in the project root and reports the visible face color. An explicit video path may also be passed to process an AprilTag video.
